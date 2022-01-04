@@ -1,13 +1,64 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+    --bg-white: #f4f6fa;
+    --bg-green: #17af5c;
+    --msj: #0c0e8f;
+    --msj2: #ffffff;
+    --messaje: rgb(248, 12, 12);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h2{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: var(--msj);
+    text-align: center;
+}
+p{
+    padding: 5px 20px 5px 20px;
+}
+
+.text-form-message{
+    color: var(--messaje);
+    
+}
+.text-form-data{
+    color: var(--bg-green);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-left: 12px;
+}
+
+.d-flex-per{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.d-flex-per button{
+    width: 160px;
+    text-align: left;
+}
+
+
+.form-per{
+    padding: 5px 75px 5px 75px;
+}
+
+body{
+    background-color: var(--bg-white);
+}
+
+.select-form-p p{
+    color: var(--l-p);
+}
+
+
+/* mensajes */
+
+.msj-1{
+    display: flex;
+    margin: 5% 10% 5% 10%;
+    padding: 5px;
+    height: auto;
+    justify-content: center;
+    color: blue;
+    border-radius: 15px;
+    border: solid 1px blue;
+    
 }

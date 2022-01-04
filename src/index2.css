@@ -1,0 +1,10 @@
+
+.row{
+    display: grid;
+    grid-template-columns: repeat(2, 40fr) ;
+    column-gap: 12px;
+    row-gap: 10px;
+    justify-content: center;
+    margin: 3% 10% 0 10%;
+
+}
