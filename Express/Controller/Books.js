@@ -27,6 +27,7 @@ exports.addCharter = async(req, res)=>{
     res.json({mesage: `El capitulo ${validate.charter} ya existe`});
   }else{
     const {charter, version, idbook, testament, versiculos, numberVerses}= req.body;
+    //ver funciones callback mas abajo
     const replaceVerseMas = replaceVerse(versiculos, numberVerses);
     const arrayVerses = divideVerse(replaceVerseMas);
     const BooksData = await Book.findById(idbook);
@@ -49,8 +50,42 @@ exports.addCharter = async(req, res)=>{
   
 }
 
+exports.getCharter = async(req, res)=>{
+    const data = await Charter.find();
+    res.json(data);
+}
+
+exports.getBookPopulate = async(req, res)=>{
+  const datos = await Book.find().populate('capitulos');
+  res.json(datos);
+}
+
+exports.getCharterEdit = async (req, res)=>{
+  const datos = await Book.findById(req.params.id).populate("capitulos");
+  res.json(datos);
+}
+
+exports.editCharter = async (req, res)=>{
+  const data = await Charter.findById(req.params.id).populate('verses');
+  res.json(data);
+}
+
+exports.deleteCharter = async (req, res)=>{
+    const data = await Charter.findById(req.params.id);
+    for(let n=0; n<data.verses.length; n ++){
+      await Verse.findByIdAndDelete(data.verses[n]);
+    }
+    await Charter.findByIdAndDelete(data._id);
+    res.json({mesage: `${data.charter} ha sido borrado`});
+}
 
 
+
+
+
+
+
+//funciones callback
 const replaceVerse = (versiculos, numberVerses)=>{
   const y = parseInt(numberVerses);
   let verseCombertido= versiculos;
@@ -71,11 +106,4 @@ const divideVerse = (replaceVerseMas)=>{
   return cadena;
 }
 
-
-
-
-
-exports.getCharter = async(req, res)=>{
-    const data = await Charter.find();
-    res.json(data);
-}
+//fin de funciones callback

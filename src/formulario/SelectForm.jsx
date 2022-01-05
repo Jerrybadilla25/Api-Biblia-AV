@@ -17,11 +17,12 @@ export default function SelectForm(props) {
           <button className="btn btn-primary mx-1" onClick={props.capitulo}>
             Charter
           </button>
-          <button className="btn btn-primary mx-1" onClick={props.versiculo}>
-            Verse
-          </button>
+         
           <button className="btn btn-primary mx-1" onClick={props.Bibliaapp}>
             Biblia
+          </button>
+          <button className="btn btn-primary mx-1" onClick={props.EditCharte}>
+            Edit Charter
           </button>
         </div>
       

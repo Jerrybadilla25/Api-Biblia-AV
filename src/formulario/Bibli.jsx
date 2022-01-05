@@ -1,43 +1,55 @@
 import React from "react";
-import { useState } from "react/cjs/react.development";
-import Subcapitulos from '../formulario/SubCapitulos';
+import { useState, useEffect } from "react/cjs/react.development";
+import Subcapitulos from "../formulario/SubCapitulos";
 
 export default function Bibli(props) {
-
   const http = " http://localhost:4200";
-  const [capitulos, setCapitulos]= useState([]);
+  const [capitulos, setCapitulos] = useState([]);
 
-  const charter = async (id)=>{
-        const data = await fetch(`${http}/books/getLibroCapitulo`,{
-            method: "POST",
-            body: JSON.stringify({id: id}),
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-        });
-        const res = await data.json();
-        setCapitulos(res);
-  }
+  useEffect(() => {
+    charter();
+  }, []);
+
+  const charter = async (id) => {
+    const data = await fetch(`${http}/books/books/populate`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const res = await data.json();
+    setCapitulos(res);
+  };
 
   return (
-    <div>
-        <div>
-            {
-                props.BookAll.map((itm)=>(
-                   <button 
-                   key={itm._id}
-                   onClick={()=>charter(itm._id)}
-                   >{itm.book}</button> 
-                ))
-            }
-            
-        </div>
-
-        {capitulos._id && <Subcapitulos capitulos={capitulos}/>}
-        
-    </div>  
+    <div className="container mt-5">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">indice</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Libro</th>
+          <th scope="col">capitulos</th>
+          <th scope="col">version</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+        capitulos.map((itm, idx) =>(
+          <tr key={itm._id}>
+          <th scope="row">{idx+1}</th>
+          <td>{itm.nomenclatura}</td>
+          <td>{itm.book}</td>
+          <td>{itm.capitulos.length}</td>
+          <td>{itm.version}</td>
+        </tr>
+        ))
+      }
+      </tbody>
+    </table>
+    </div>
+    
+    
   );
-  
 }
-

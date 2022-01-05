@@ -64,6 +64,7 @@ export default function FormCharter(props) {
     });
     const res = await data.json();
     notify(res.mesage);
+    getCharter();
     reset({
       charter: "",
       libro: "",
@@ -76,7 +77,7 @@ export default function FormCharter(props) {
 
   return (
     <div className="mx-5 my-5">
-      <form onSubmit={handleSubmit(onSubmit)} className="form-per">
+      <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="form-group">
           <label>Seleccione libro</label>
           <select

@@ -4,6 +4,8 @@ import FormCharter from '../formulario/FormCharter';
 import FormVerse from   '../formulario/FormVerse';
 import SelectForm from  '../formulario/SelectForm';
 import Biblia from '../formulario/Bibli';
+import Header from './Header';
+import EditCharter from './EditCharter';
 
 export default function Home() {
   const [select, setSelect] = useState("none");
@@ -41,8 +43,8 @@ export default function Home() {
   }
 
   
-  const versiculo = ()=>{
-    setSelect("Verse")
+  const EditCharte = ()=>{
+    setSelect("EditCharter")
   }
 
   const Bibliaapp = ()=>{
@@ -52,39 +54,55 @@ export default function Home() {
   if(select==="Book")
   return (
     <div>
-      <SelectForm libro={libro} capitulo={capitulo} versiculo={versiculo} Bibliaapp={Bibliaapp} />
-      <FormBook BookAll={BookAll} cargaBook={cargaBook} />
+      <Header/>
+      <div className='container'>
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
+        <FormBook BookAll={BookAll} cargaBook={cargaBook} />
+      </div>
+      
     </div>
     
   )
-  if(select==="Verse")
+  if(select==="EditCharter")
   return (
     <div>
-      <SelectForm libro={libro} capitulo={capitulo} versiculo={versiculo} Bibliaapp={Bibliaapp} />
-      <FormVerse/>
+      <Header/>
+      <div className="container">
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
+        <EditCharter http={http} BookAll={BookAll}/>
+      </div>
     </div>
     
   )
   if(select==="Charter")
   return (
     <div>
-      <SelectForm libro={libro} capitulo={capitulo} versiculo={versiculo} Bibliaapp={Bibliaapp} />
-      <FormCharter BookAll={BookAll}/>
+      <Header/>
+      <div className="container">
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
+        <FormCharter BookAll={BookAll}/>
+      </div>
     </div>
     
   )
   if(select==="none")
   return (
     <div>
-      <SelectForm libro={libro} capitulo={capitulo} versiculo={versiculo} Bibliaapp={Bibliaapp} />
+      <Header/>
+      <div className="container">
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
+      </div>
     </div>
     
   )
   if(select==="Biblia")
   return (
     <div>
-      <SelectForm libro={libro} capitulo={capitulo} versiculo={versiculo} Bibliaapp={Bibliaapp} />
-      <Biblia BookAll={BookAll} />
+      <Header/>
+      <div className="container">
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
+        <Biblia BookAll={BookAll} />
+      </div>
     </div>
     
   )

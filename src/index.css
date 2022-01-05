@@ -4,6 +4,28 @@
     --msj: #0c0e8f;
     --msj2: #ffffff;
     --messaje: rgb(248, 12, 12);
+    --bg: #a5acb6;
+}
+
+.box-per{
+    height: 500px;
+    overflow: scroll;
+}
+
+.icon-delete{
+    color: var(--msj);
+    font-weight: bolder;
+    font-size: 1.4rem;
+}
+.icon-delete:hover{
+    
+    color: rgb(221, 43, 43);
+    
+}
+
+.list-edit-charter{
+    width: 100%;
+    background-color: yellowgreen;
 }
 
 h2{
@@ -13,6 +35,10 @@ h2{
 }
 p{
     padding: 5px 20px 5px 20px;
+}
+h5{
+    color: var(--msj);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .text-form-message{
@@ -27,11 +53,11 @@ p{
 
 .d-flex-per{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
 }
 .d-flex-per button{
-    width: 160px;
+    width: 170px;
     text-align: left;
 }
 

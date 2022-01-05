@@ -4,11 +4,15 @@ import './App.css';
 import Home from './Vistas/Home';
 
 
+
 function App() {
   return(
-    <div>
-      <Home/>
-    </div>
+    
+      <div>
+        <Home/>
+      </div>
+      
+    
   )
 }
 
