@@ -7,7 +7,7 @@ require('dotenv').config();
 
 
 //configuracion
-app.set('port', process.env.PORT || 4200 );
+app.set('port', process.env.PORT || 4003 );
 
 //import databd
 const {mongoose}= require('./database');
@@ -24,7 +24,7 @@ app.use(cors());
 
 //rutas
 
-//app.use('/user', require('./router/routes.user'));
+app.use('/user', require('./router/router.user'));
 app.use('/books', require('./router/roter.book'));
 //app.use('/', require('./router/roter'));
 

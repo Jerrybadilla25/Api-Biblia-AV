@@ -21,6 +21,7 @@ export default function EditCharter(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-access-token": props.user.token
       },
     });
     const res = await data.json(data);
@@ -32,6 +33,7 @@ export default function EditCharter(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-access-token": props.user.token
       },
     });
     const res = await data.json();
@@ -44,6 +46,7 @@ export default function EditCharter(props) {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
+                "x-access-token": props.user.token
             },
       });
       const res = await data.json();

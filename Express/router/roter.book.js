@@ -2,22 +2,23 @@ const express = require("express");
 const router = express.Router();
 
 const Controller = require('../Controller/Books');
+const verfyToken = require('../Auth/Token');
 
 //Rutas
 
-router.get('/books', Controller.getBook);
-router.post("/books", Controller.addBook);
+router.get('/books', verfyToken, Controller.getBook);
+router.post("/books",verfyToken, Controller.addBook);
 
-router.post('/charter', Controller.addCharter);
-router.get('/charter', Controller.getCharter);
+router.post('/charter',verfyToken, Controller.addCharter);
+router.get('/charter',verfyToken, Controller.getCharter);
 
-router.get('/books/populate', Controller.getBookPopulate);
+router.get('/books/populate',verfyToken, Controller.getBookPopulate);
 
-router.get('/editGetCharter/:id', Controller.getCharterEdit);
+router.get('/editGetCharter/:id',verfyToken, Controller.getCharterEdit);
 
-router.get('/editCharter/:id', Controller.editCharter);
+router.get('/editCharter/:id',verfyToken, Controller.editCharter);
 
-router.delete('/editCharter/:id', Controller.deleteCharter);
+router.delete('/editCharter/:id',verfyToken, Controller.deleteCharter);
 
 
 module.exports = router;

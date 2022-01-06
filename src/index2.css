@@ -1,4 +1,12 @@
 
+@media only screen and (max-width: 768px) {
+    .form-login{
+        width: 80%;
+    }
+}
+
+
+
 .list-group-item:hover{
     background-color: #007bff;
     color: white;

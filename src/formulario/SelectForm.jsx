@@ -11,18 +11,21 @@ export default function SelectForm(props) {
       </div>
       
         <div className="my-3 mx-5 d-flex justify-content-around">
-          <button className="btn btn-primary mx-1" onClick={props.libro}>
+          <button className="btn-select-form" onClick={props.libro}>
             Book
           </button>
-          <button className="btn btn-primary mx-1" onClick={props.capitulo}>
+          <button className="btn-select-form" onClick={props.capitulo}>
             Charter
           </button>
          
-          <button className="btn btn-primary mx-1" onClick={props.Bibliaapp}>
+          <button className="btn-select-form" onClick={props.Bibliaapp}>
             Biblia
           </button>
-          <button className="btn btn-primary mx-1" onClick={props.EditCharte}>
+          <button className="btn-select-form" onClick={props.EditCharte}>
             Edit Charter
+          </button>
+          <button className="btn-select-logout" onClick={props.LoginOut}>
+            Logout
           </button>
         </div>
       

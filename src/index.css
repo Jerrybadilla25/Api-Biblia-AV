@@ -3,9 +3,146 @@
     --bg-green: #17af5c;
     --msj: #0c0e8f;
     --msj2: #ffffff;
-    --messaje: rgb(248, 12, 12);
     --bg: #a5acb6;
+    --bg-blu: #2957D9;
+    --bg-turque: #231830;
+    --bg-black: #070707;
+    --bg-turque-body: #140e1b;
+    --alert: #e9b50d;
+    --l-white: #f3f4f6;
+    --l-muted: #968282;
+    --l-message: #991b1b;
 }
+
+.jumbotron{
+    height: 200px !important;
+}
+
+/* #######################  login ###########################*/
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-turque-body);
+    width: 100vw;
+    height: 100vh;
+}
+.form-login{
+    width: 20%;
+}
+.form-login label{
+    color: var(--bg-white);
+    padding-left: 15px;
+    font-size: 1.3rem;
+}
+.login-input{
+    margin-top: 5px;
+    background-color: var(--bg-turque-body);
+    border: solid 1px var(--bg-white);
+    height: 50px;
+    border-radius: 10px;
+    outline: none;
+    color: var(--bg-white);
+    padding-left: 15px;
+}
+.login-input[type=text]{
+    margin-top: 5px;
+    background-color: var(--bg-turque-body);
+    border: solid 1px var(--bg-white);
+    height: 50px;
+    border-radius: 10px;
+    color: var(--bg-white);
+    padding-left: 15px;
+    
+}
+.login-input[type=text]:focus{
+    margin-top: 5px;
+    background-color: var(--bg-turque-body);
+    border: solid 1px var(--bg-white);
+    height: 50px;
+    border-radius: 10px;
+    color: var(--bg-white);
+    padding-left: 15px;
+}
+.login-input::placeholder{
+    color: rgba(116, 110, 110, 0.404);
+}
+.d-flex-login-col{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.d-flex-login-col h4{
+    color: var(--bg-white);
+    font-size: 1.5rem;
+}
+.d-flex-login-col h6{
+    color: var(--l-message);
+    font-size: 1rem;
+}
+.btn-login{
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: solid 1px var(--bg-turque-body);
+    background-color: var(--bg-white);
+    color: var(--bg-turque-body);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+.btn-login:hover{
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: solid 1px var(--l-message);
+    background-color: var(--bg-white);
+    color: var(--l-message);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+
+
+
+/* ####################### fin login ###########################*/
+
+/* ####################### select form ###########################*/
+
+.btn-select-form{
+    width: 150px;
+    border: solid 2px var(--bg-turque-body);
+    border-radius: 15px;
+    margin-right: 10px;
+    background-color: var(--bg-turque);
+    color: var(--l-white);
+    padding: 5px;
+}
+.btn-select-form:hover{
+    border: solid 2px var(--l-message);
+    background-color: var(--bg-white);
+    color: var(--bg-turque-body);
+}
+.btn-select-logout{
+    width: 150px;
+    border: solid 2px var(--l-message);
+    border-radius: 15px;
+    margin-right: 10px;
+    background-color: var(--l-message);
+    color: var(--bg-white);
+    padding: 5px;
+}
+.btn-select-logout:hover{
+    border: solid 2px var(--l-message);
+    background-color: var(--bg-white);
+    color: var(--bg-turque-body);
+}
+
+
+/* ####################### fin select form ###########################*/
 
 .box-per{
     height: 500px;

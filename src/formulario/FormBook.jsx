@@ -32,6 +32,7 @@ export default function FormBook(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-access-token": props.user.token
       },
     });
     const res = await data.json();
@@ -116,7 +117,7 @@ export default function FormBook(props) {
           </select>
           <div className="text-form-message">{errors.testament?.message}</div>
 
-          <button type="submit" className="btn btn-primary mt-3">
+          <button type="submit" className="btn-select-form mt-3">
             Guardar libro
           </button>
         </form>

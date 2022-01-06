@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react/cjs/react.development";
-import Subcapitulos from "../formulario/SubCapitulos";
+
 
 export default function Bibli(props) {
   const http = " http://localhost:4200";
@@ -16,6 +16,7 @@ export default function Bibli(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-access-token": props.user.token
       },
     });
     const res = await data.json();

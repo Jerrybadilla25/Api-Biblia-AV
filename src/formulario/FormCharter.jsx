@@ -32,6 +32,7 @@ export default function FormCharter(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-access-token": props.user.token
       },
     });
     const res = await data.json();
@@ -60,6 +61,7 @@ export default function FormCharter(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "x-access-token": props.user.token
       },
     });
     const res = await data.json();
@@ -141,7 +143,7 @@ export default function FormCharter(props) {
             placeholder="copie todos los versiculos"
           />
           <div className="text-form-message">{errors.versiculos?.message}</div>
-          <button type="submit" className="btn btn-primary mt-4">
+          <button type="submit" className="btn-select-form mt-4">
             Guardar
           </button>
         </div>

@@ -7,10 +7,10 @@ import Biblia from '../formulario/Bibli';
 import Header from './Header';
 import EditCharter from './EditCharter';
 
-export default function Home() {
+export default function Home(props) {
   const [select, setSelect] = useState("none");
   const [BookAll, setBookAll]= useState([]);
-  const http = " http://localhost:4200";
+  //const http = " http://localhost:4200";
 
 
   React.useEffect(() => {
@@ -19,11 +19,12 @@ export default function Home() {
 
 
   const cargaBook = async ()=>{
-    const data = await fetch(`${http}/books/books`, {
+    const data = await fetch(`${props.http}/books/books`, {
       mode: 'cors',
       headers: {
         "Content-Type": "application/json",
          Accept: "application/json",
+         "x-access-token": props.user.token
       },
     });
     const res = await data.json();
@@ -56,8 +57,8 @@ export default function Home() {
     <div>
       <Header/>
       <div className='container'>
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
-        <FormBook BookAll={BookAll} cargaBook={cargaBook} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
+        <FormBook BookAll={BookAll} cargaBook={cargaBook} user={props.user} />
       </div>
       
     </div>
@@ -68,8 +69,8 @@ export default function Home() {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
-        <EditCharter http={http} BookAll={BookAll}/>
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
+        <EditCharter http={props.http} BookAll={BookAll} user={props.user}/>
       </div>
     </div>
     
@@ -79,8 +80,8 @@ export default function Home() {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
-        <FormCharter BookAll={BookAll}/>
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut}/>
+        <FormCharter BookAll={BookAll} user={props.user}/>
       </div>
     </div>
     
@@ -90,7 +91,7 @@ export default function Home() {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
       </div>
     </div>
     
@@ -100,8 +101,8 @@ export default function Home() {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} />
-        <Biblia BookAll={BookAll} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
+        <Biblia BookAll={BookAll} user={props.user} />
       </div>
     </div>
     
