@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import CharterRender from '../Vistas/Charter';
 
 export default function FormCharter(props) {
-  const http = " http://localhost:4200";
-
   const [charter, setCharter] = useState();
   const {
     register,
@@ -27,7 +25,7 @@ export default function FormCharter(props) {
     });
 
   const getCharter = async () => {
-    const data = await fetch(`${http}/books/charter`, {
+    const data = await fetch(`${props.http}/books/charter`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +53,7 @@ export default function FormCharter(props) {
       const newData = { idbook: data1._id };
       datosJoin = Object.assign(datos, newData);
     }
-    const data = await fetch(`${http}/books/charter`, {
+    const data = await fetch(`${props.http}/books/charter`, {
       method: "POST",
       body: JSON.stringify(datosJoin),
       headers: {

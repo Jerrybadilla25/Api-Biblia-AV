@@ -22,11 +22,10 @@ export default function FormBook(props) {
       },
     });
 
-  const http = " http://localhost:4200";
   const onSubmit = async () => {
     const book = watch();
     console.log(book);
-    const data = await fetch(`${http}/books/books`, {
+    const data = await fetch(`${props.http}/books/books`, {
       method: "POST",
       body: JSON.stringify(book),
       headers: {

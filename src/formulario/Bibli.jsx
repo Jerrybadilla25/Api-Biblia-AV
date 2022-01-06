@@ -1,9 +1,8 @@
-import React from "react";
-import { useState, useEffect } from "react/cjs/react.development";
+import React,{useState, useEffect} from "react";
+
 
 
 export default function Bibli(props) {
-  const http = " http://localhost:4200";
   const [capitulos, setCapitulos] = useState([]);
 
   useEffect(() => {
@@ -11,7 +10,7 @@ export default function Bibli(props) {
   }, []);
 
   const charter = async (id) => {
-    const data = await fetch(`${http}/books/books/populate`, {
+    const data = await fetch(`${props.http}/books/books/populate`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

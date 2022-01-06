@@ -57,7 +57,7 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className='container'>
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
+        <SelectForm http={props.http} libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
         <FormBook BookAll={BookAll} cargaBook={cargaBook} user={props.user} />
       </div>
       
@@ -81,7 +81,7 @@ export default function Home(props) {
       <Header/>
       <div className="container">
         <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut}/>
-        <FormCharter BookAll={BookAll} user={props.user}/>
+        <FormCharter BookAll={BookAll} user={props.user} http={props.http}/>
       </div>
     </div>
     
@@ -102,7 +102,7 @@ export default function Home(props) {
       <Header/>
       <div className="container">
         <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
-        <Biblia BookAll={BookAll} user={props.user} />
+        <Biblia BookAll={BookAll} user={props.user} http={props.http} />
       </div>
     </div>
     
