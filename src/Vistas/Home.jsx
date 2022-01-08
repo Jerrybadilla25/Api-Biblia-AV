@@ -57,8 +57,8 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className='container'>
-        <SelectForm http={props.http} libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
-        <FormBook BookAll={BookAll} cargaBook={cargaBook} user={props.user} />
+        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
+        <FormBook http={props.http} BookAll={BookAll} cargaBook={cargaBook} user={props.user} />
       </div>
       
     </div>
