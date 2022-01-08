@@ -102,7 +102,7 @@ export default function FormBook(props) {
               {...register("version", { required: "Seleccione una opcion" })}
             >
               <option></option>
-              <option>RV1960</option>
+              <option>Biblia_del_oso_1569</option>
             </select>
             <div className="text-form-message">{errors.version?.message}</div>
           </div>
