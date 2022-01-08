@@ -144,9 +144,34 @@
 
 /* ####################### fin select form ###########################*/
 
+
+
+.input-edit-verse{
+    width: 100%;
+    height: 150px;
+    overflow:visible;
+    text-align: justify;
+}
+.btn-edit-verse{
+    border: none;
+    background-color: var(--bg-turque);
+    color: var(--l-white);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 0 5px 0 5px;
+}
+.box-edit-verse{
+    background-color: rgb(167, 161, 161);
+    padding: 7px;
+}
+
+
+
+
 .box-per{
     height: 500px;
     overflow: scroll;
+    padding-right: 20px;
 }
 
 .icon-delete{
@@ -178,10 +203,25 @@ h5{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* ##############################  form charter  #######################*/
+
 .text-form-message{
-    color: var(--messaje);
-    
+    color: var(--l-message);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+.form-group label{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    letter-spacing: 1.1px;
+    color: var(--bg-turque);
+    margin-top: 10px;
+}
+
+
+
+
+/* ############################## fin form charter  #######################*/
+
 .text-form-data{
     color: var(--bg-green);
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

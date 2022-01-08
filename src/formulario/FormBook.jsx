@@ -31,7 +31,7 @@ export default function FormBook(props) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "x-access-token": props.user.token
+        "x-access-token": props.user.token,
       },
     });
     const res = await data.json();
@@ -94,27 +94,31 @@ export default function FormBook(props) {
 
             <div className="text-form-message">{errors.order?.message}</div>
           </div>
-          <label>Seleccione la version</label>
-          <select
-            className="form-control"
-            name="version"
-            {...register("version", { required: "Seleccione una opcion" })}
-          >
-            <option></option>
-            <option>RV1960</option>
-          </select>
-          <div className="text-form-message">{errors.version?.message}</div>
-          <label>Seleccione el testamento</label>
-          <select
-            className="form-control"
-            name="testament"
-            {...register("testament", { required: "Seleccione una opcion" })}
-          >
-            <option></option>
-            <option>Antiguo testamento</option>
-            <option>Nuevo testamento</option>
-          </select>
-          <div className="text-form-message">{errors.testament?.message}</div>
+          <div className="form-group">
+            <label>Seleccione la version</label>
+            <select
+              className="form-control"
+              name="version"
+              {...register("version", { required: "Seleccione una opcion" })}
+            >
+              <option></option>
+              <option>RV1960</option>
+            </select>
+            <div className="text-form-message">{errors.version?.message}</div>
+          </div>
+          <div className="form-group">
+            <label>Seleccione el testamento</label>
+            <select
+              className="form-control"
+              name="testament"
+              {...register("testament", { required: "Seleccione una opcion" })}
+            >
+              <option></option>
+              <option>Antiguo testamento</option>
+              <option>Nuevo testamento</option>
+            </select>
+            <div className="text-form-message">{errors.testament?.message}</div>
+          </div>
 
           <button type="submit" className="btn-select-form mt-3">
             Guardar libro

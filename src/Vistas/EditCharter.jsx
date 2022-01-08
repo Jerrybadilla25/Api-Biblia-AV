@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function EditCharter(props) {
   const [books, setBooks] = useState({});
   const [charter, setCharter] = useState({});
+  const [editVerse, setEditVerse] = useState({});
 
   //toaster
   const notify = (mesage) =>
@@ -15,6 +16,38 @@ export default function EditCharter(props) {
         color: "#ffffff",
       },
     });
+
+
+  //edit formcharter
+  const capturarEditVerses = (e) => {
+    setEditVerse({
+      ...editVerse,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const editarVersiculo = async (id)=>{
+      //let newVersiculo = {versiculo: editVerse.versiculo}
+      let verseSelect = charter.verses.filter(x=> x._id === id);
+      let {_id, numero, version, testament}=verseSelect[0];
+      let datos = {
+        _id:_id, numero: numero, version: version, testament: testament, versiculo:editVerse.versiculo
+      }
+      const data = await fetch(`${props.http}/books/editVerses`,{
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-access-token": props.user.token
+        },
+
+      });
+      const res = await data.json();
+      notify(res.mesage);
+
+  }
+
 
   const selectBook = async (id) => {
     const data = await fetch(`${props.http}/books/editGetCharter/${id}`, {
@@ -97,10 +130,23 @@ export default function EditCharter(props) {
                 
                 <div className="box-per">
                   {charter.verses.map((itm) => (
-                    <div key={itm._id}>
-                      <p>
-                        {itm.numero} {itm.versiculo}
-                      </p>
+                    <div key={itm._id} className="d-flex flex-column mt-5 box-edit-verse">
+                      <div className="d-flex justify-content-between" >
+                        <strong className="btn-edit-verse" >{itm.numero}</strong>
+                        <button 
+                        className="btn-edit-verse"
+                        onClick={()=>editarVersiculo(itm._id)}
+                        >Guardar los cambios</button>
+                      </div>
+                      
+                      <textarea 
+                      className="input-edit-verse"
+                      defaultValue={itm.versiculo}
+                      onChange={capturarEditVerses}
+                      name="versiculo" 
+                      cols="10" 
+                      rows="10">
+                      </textarea>
                     </div>
                   ))}
                 </div>
@@ -113,3 +159,9 @@ export default function EditCharter(props) {
     </div>
   );
 }
+
+/*
+<p>
+                        {itm.numero} {itm.versiculo}
+                      </p>
+*/

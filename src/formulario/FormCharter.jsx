@@ -24,6 +24,8 @@ export default function FormCharter(props) {
       },
     });
 
+    console.log(watch());
+
   const getCharter = async () => {
     const data = await fetch(`${props.http}/books/charter`, {
       method: "GET",
@@ -91,14 +93,20 @@ export default function FormCharter(props) {
             ))}
           </select>
           <div className="text-form-message">{errors.libro?.message}</div>
-          <label>Ingrese Libro y capitulo</label>
+          
+
+          <label>orden de capitulo(numero)</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="exampleInputEmail1"
-            {...register("charter", { required: "Este campo es requerido" })}
+            {...register("order", { required: "Este campo es requerido" })}
           />
-          <div className="text-form-message">{errors.charter?.message}</div>
+          <div className="text-form-message">{errors.order?.message}</div>
+
+
+
+
           <label>Seleccione la version</label>
           <select
             className="form-control"

@@ -20,5 +20,7 @@ router.get('/editCharter/:id',verfyToken, Controller.editCharter);
 
 router.delete('/editCharter/:id',verfyToken, Controller.deleteCharter);
 
+router.post('/editVerses',verfyToken, Controller.editVerse);
+
 
 module.exports = router;

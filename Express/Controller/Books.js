@@ -22,16 +22,18 @@ exports.addBook = async (req, res)=>{
 }
 
 exports.addCharter = async(req, res)=>{
-  const validate = await Charter.findOne({charter: req.body.charter});
+  const {version, idbook, testament, versiculos, numberVerses, order, libro}= req.body;
+  const charter = libro+" "+order;
+  console.log(charter);
+  const validate = await Charter.findOne({charter: charter});
   if(validate){
     res.json({mesage: `El capitulo ${validate.charter} ya existe`});
   }else{
-    const {charter, version, idbook, testament, versiculos, numberVerses}= req.body;
     //ver funciones callback mas abajo
     const replaceVerseMas = replaceVerse(versiculos, numberVerses);
     const arrayVerses = divideVerse(replaceVerseMas);
     const BooksData = await Book.findById(idbook);
-    const newCharter = await Charter({charter, version,testament});
+    const newCharter = await Charter({charter, version,testament, order});
     BooksData.capitulos.push(newCharter._id);
     await BooksData.save();
     for(let n = 0; n<arrayVerses.length; n++ ){
@@ -79,7 +81,10 @@ exports.deleteCharter = async (req, res)=>{
     res.json({mesage: `${data.charter} ha sido borrado`});
 }
 
-
+exports.editVerse = async (req, res)=>{
+   await Verse.findByIdAndUpdate(req.body._id, req.body);
+   res.json({mesage: "Cambios realizados"});
+}
 
 
 
