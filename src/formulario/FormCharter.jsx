@@ -113,7 +113,7 @@ export default function FormCharter(props) {
             {...register("version", { required: "Este campo es requerido" })}
           >
             <option></option>
-            <option>RV1960</option>
+            <option>Biblia_del_oso_1569</option>
           </select>
           <label>Seleccione el testamento</label>
           <select
