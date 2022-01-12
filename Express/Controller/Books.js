@@ -54,7 +54,8 @@ exports.addCharter = async(req, res)=>{
 }
 
 exports.getCharter = async(req, res)=>{
-    const data = await Charter.find();
+    const userName = req.params.userName;
+    const data = await Charter.find({userCreator: userName});
     res.json(data);
 }
 

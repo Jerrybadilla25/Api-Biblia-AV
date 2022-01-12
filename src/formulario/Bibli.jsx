@@ -1,26 +1,9 @@
-import React,{useState, useEffect} from "react";
+import React from "react";
 
 
 
 export default function Bibli(props) {
-  const [capitulos, setCapitulos] = useState([]);
 
-  useEffect(() => {
-    charter();
-  }, []);
-
-  const charter = async (id) => {
-    const data = await fetch(`${props.http}/books/books/populate`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "x-access-token": props.user.token
-      },
-    });
-    const res = await data.json();
-    setCapitulos(res);
-  };
 
   return (
     <div className="container mt-5">
@@ -36,7 +19,7 @@ export default function Bibli(props) {
       </thead>
       <tbody>
       {
-        capitulos.map((itm, idx) =>(
+        props.BookAll.map((itm, idx) =>(
           <tr key={itm._id}>
           <th scope="row">{idx+1}</th>
           <td>{itm.nomenclatura}</td>

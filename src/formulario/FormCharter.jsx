@@ -27,7 +27,7 @@ export default function FormCharter(props) {
     console.log(watch());
 
   const getCharter = async () => {
-    const data = await fetch(`${props.http}/books/charter`, {
+    const data = await fetch(`${props.http}/books/charter/${props.user.user}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

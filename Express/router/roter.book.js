@@ -10,7 +10,7 @@ router.get('/books/:userName', verfyToken, Controller.getBook);
 router.post("/books",verfyToken, Controller.addBook);
 
 router.post('/charter',verfyToken, Controller.addCharter);
-router.get('/charter',verfyToken, Controller.getCharter);
+router.get('/charter/:userName',verfyToken, Controller.getCharter);
 
 router.get('/books/populate',verfyToken, Controller.getBookPopulate);
 
