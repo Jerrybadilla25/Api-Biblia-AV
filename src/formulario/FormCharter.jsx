@@ -44,16 +44,17 @@ export default function FormCharter(props) {
   }, []);
 
   const onSubmit = async () => {
+    const userName = {userCreator: props.user.user};
     const datos = watch();
     let datosJoin = "";
     if (!datos.libro) {
       const data1 = props.BookAll.find((x) => x.book === "Genesis");
       const newData = { idbook: data1._id };
-      datosJoin = Object.assign(datos, newData);
+      datosJoin = Object.assign(datos, newData, userName);
     } else {
       const data1 = props.BookAll.find((x) => x.book === datos.libro);
       const newData = { idbook: data1._id };
-      datosJoin = Object.assign(datos, newData);
+      datosJoin = Object.assign(datos, newData, userName);
     }
     const data = await fetch(`${props.http}/books/charter`, {
       method: "POST",
@@ -149,6 +150,9 @@ export default function FormCharter(props) {
             placeholder="copie todos los versiculos"
           />
           <div className="text-form-message">{errors.versiculos?.message}</div>
+          <small className="text-muted">
+            <p><span>Usuario </span>{props.user.user}</p>
+          </small>
           <button type="submit" className="btn-select-form mt-4">
             Guardar
           </button>

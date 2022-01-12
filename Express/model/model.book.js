@@ -7,6 +7,7 @@ const Shema = mongoose.Schema;
 const newBook = new Shema({
     nomenclatura: {type: String},
     book : {type: String},
+    userCreator : {type: String},
     version: { type: String},
     testament: { type: String},
     order: { type: Number},

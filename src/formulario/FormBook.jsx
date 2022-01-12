@@ -23,8 +23,9 @@ export default function FormBook(props) {
     });
 
   const onSubmit = async () => {
-    const book = watch();
-    console.log(book);
+    const userID = {userCreator: props.user.user};
+    const formdata = watch();
+    const book = Object.assign(userID, formdata);
     const data = await fetch(`${props.http}/books/books`, {
       method: "POST",
       body: JSON.stringify(book),
@@ -119,6 +120,9 @@ export default function FormBook(props) {
             </select>
             <div className="text-form-message">{errors.testament?.message}</div>
           </div>
+          <small className="text-muted">
+            <p><span>Usuario </span>{props.user.user}</p>
+          </small>
 
           <button type="submit" className="btn-select-form mt-3">
             Guardar libro

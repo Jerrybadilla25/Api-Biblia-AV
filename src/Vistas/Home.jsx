@@ -19,7 +19,7 @@ export default function Home(props) {
 
 
   const cargaBook = async ()=>{
-    const data = await fetch(`${props.http}/books/books`, {
+    const data = await fetch(`${props.http}/books/books/${props.user.user}`, {
       mode: 'cors',
       headers: {
         "Content-Type": "application/json",

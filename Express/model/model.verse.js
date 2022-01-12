@@ -9,6 +9,7 @@ const newVerse = new Shema({
     numero : {type: Number},
     versiculo: { type: String},
     version: { type: String},
+    userCreator : {type: String},
     testament: { type: String},
     like: { type: Number, default: 0},
     view: { type: Number, default: 0},

@@ -155,13 +155,11 @@ export default function EditCharter(props) {
           )}
         </div>
       </div>
+      <small className="text-muted my-5">
+        <p><span>Usuario </span>{props.user.user}</p>
+      </small>
       <Toaster />
     </div>
   );
 }
 
-/*
-<p>
-                        {itm.numero} {itm.versiculo}
-                      </p>
-*/

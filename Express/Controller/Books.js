@@ -4,7 +4,8 @@ const Verse = require('../model/model.verse');
 
 
 exports.getBook = async (req, res)=>{
-    const data = await Book.find();
+    const user = req.params.userName;
+    const data = await Book.find({userCreator: user});
     res.json(data);
 }
 
@@ -13,8 +14,8 @@ exports.addBook = async (req, res)=>{
   if(books){
     res.json({mesage: `El libro de ${req.body.book} ya esta registrado`});
   }else{
-    const {book, order, version, testament, nomenclatura} = req.body;
-    const data = new Book({book, order, version, testament, nomenclatura});
+    const {book, order, version, testament, nomenclatura, userCreator} = req.body;
+    const data = new Book({book, order, version, testament, nomenclatura, userCreator});
     await data.save();
     res.status(200).json({mesage: "Libro agregado correctamente"});
   }
@@ -22,9 +23,8 @@ exports.addBook = async (req, res)=>{
 }
 
 exports.addCharter = async(req, res)=>{
-  const {version, idbook, testament, versiculos, numberVerses, order, libro}= req.body;
+  const {version, idbook, testament, versiculos, numberVerses, order, libro, userCreator}= req.body;
   const charter = libro+" "+order;
-  console.log(charter);
   const validate = await Charter.findOne({charter: charter});
   if(validate){
     res.json({mesage: `El capitulo ${validate.charter} ya existe`});
@@ -33,13 +33,14 @@ exports.addCharter = async(req, res)=>{
     const replaceVerseMas = replaceVerse(versiculos, numberVerses);
     const arrayVerses = divideVerse(replaceVerseMas);
     const BooksData = await Book.findById(idbook);
-    const newCharter = await Charter({charter, version,testament, order});
+    const newCharter = await Charter({charter, version,testament, order, userCreator});
     BooksData.capitulos.push(newCharter._id);
     await BooksData.save();
     for(let n = 0; n<arrayVerses.length; n++ ){
       const newVerse = await Verse({
         version: version, 
-        testament: testament, 
+        testament: testament,
+        userCreator: userCreator, 
         numero: n+1, 
         versiculo: arrayVerses[n]
       });
@@ -58,8 +59,8 @@ exports.getCharter = async(req, res)=>{
 }
 
 exports.getBookPopulate = async(req, res)=>{
-  const datos = await Book.find().populate('capitulos');
-  res.json(datos);
+  const data = await Book.find().populate('capitulos');
+  res.json(data);
 }
 
 exports.getCharterEdit = async (req, res)=>{
