@@ -136,10 +136,10 @@ export default function FormBook(props) {
             <div>
               <h3>Libros creados</h3>
               <div className="d-flex-per">
-                {props.BookAll.map((itm, idx) => (
+                {props.BookAll.map((itm) => (
                   <div key={itm._id}>
                     <button className="btn btn-outline-primary mx-1 my-1">
-                      {idx + 1}-{itm.book}
+                      {itm.order}-{itm.book}
                     </button>
                   </div>
                 ))}
