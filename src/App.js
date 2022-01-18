@@ -53,7 +53,6 @@ function App(props) {
       },
     });
     const res = await data.json();
-    console.log(res);
     if(res.message){
       notify(res.message);
     }else{

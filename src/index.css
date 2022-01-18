@@ -265,3 +265,18 @@ body{
     border: solid 1px blue;
     
 }
+
+/*########################## Biblia ############################*/
+.btn-select-biblia{
+    background-color: var(--l-message);
+    color: var(--l-white);
+    border: solid 1px var(--l-message);
+    padding: 5px;
+    margin: 0 5px 0 5px;
+    width: 200px;
+    border-radius: 5px;
+}
+.btn-select-biblia:hover{
+    background-color: var(--l-white);
+    color: var(--bg-black);
+}

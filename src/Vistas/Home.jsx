@@ -6,15 +6,18 @@ import SelectForm from  '../formulario/SelectForm';
 import Biblia from '../formulario/Bibli';
 import Header from './Header';
 import EditCharter from './EditCharter';
+import FormVersion from '../formulario/FormVersion';
 
 export default function Home(props) {
   const [select, setSelect] = useState("none");
   const [BookAll, setBookAll]= useState([]);
+  const [versiones, setVersiones] = useState(null);
   //const http = " http://localhost:4200";
 
 
   React.useEffect(() => {
     cargaBook();
+    getversiones();
   }, []);
 
 
@@ -31,8 +34,24 @@ export default function Home(props) {
     setBookAll(res);
   }
 
+  const getversiones = async () => {
+    const data = await fetch(`${props.http}/books/versiones`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-access-token": props.user.token,
+      },
+    });
+    const res = await data.json();
+    setVersiones(res);
+  };
+
   
 
+  const versionBiblia = async ()=>{
+    setSelect("versionBiblia");
+  }
 
   const libro = async ()=>{
     setSelect("Book");
@@ -52,13 +71,31 @@ export default function Home(props) {
     setSelect("Biblia")
   }
 
+  
+
+  if(select==="versionBiblia")
+  return (
+    <div>
+      <Header/>
+      <div className='container'>
+        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <FormVersion http={props.http} user={props.user} />
+      </div>
+      
+    </div>
+    
+  )
+
+
+
+
   if(select==="Book")
   return (
     <div>
       <Header/>
       <div className='container'>
-        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
-        <FormBook http={props.http} BookAll={BookAll} cargaBook={cargaBook} user={props.user} />
+        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <FormBook http={props.http} BookAll={BookAll} cargaBook={cargaBook} user={props.user} versiones={versiones} getversiones={getversiones}/>
       </div>
       
     </div>
@@ -69,8 +106,8 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
-        <EditCharter http={props.http} BookAll={BookAll} user={props.user}/>
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <EditCharter http={props.http} BookAll={BookAll} user={props.user} versiones={versiones}/>
       </div>
     </div>
     
@@ -80,8 +117,8 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut}/>
-        <FormCharter BookAll={BookAll} user={props.user} http={props.http}/>
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia}/>
+        <FormCharter BookAll={BookAll} user={props.user} http={props.http} versiones={versiones} getversiones={getversiones}/>
       </div>
     </div>
     
@@ -91,7 +128,7 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
       </div>
     </div>
     
@@ -101,8 +138,8 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} />
-        <Biblia BookAll={BookAll} user={props.user} http={props.http} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <Biblia BookAll={BookAll} user={props.user} http={props.http}  versiones={versiones} />
       </div>
     </div>
     

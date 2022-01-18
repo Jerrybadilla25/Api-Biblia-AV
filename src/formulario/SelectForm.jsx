@@ -11,6 +11,9 @@ export default function SelectForm(props) {
       </div>
       
         <div className="my-3 mx-5 d-flex justify-content-around">
+        <button className="btn-select-form" onClick={props.versionBiblia}>
+            Version
+          </button>
           <button className="btn-select-form" onClick={props.libro}>
             Book
           </button>

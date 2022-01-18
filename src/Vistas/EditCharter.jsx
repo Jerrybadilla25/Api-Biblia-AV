@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function EditCharter(props) {
+  const [selectVerse, setSelectVerse]=useState(null);
   const [books, setBooks] = useState({});
   const [charter, setCharter] = useState({});
   const [editVerse, setEditVerse] = useState({});
@@ -25,6 +26,14 @@ export default function EditCharter(props) {
       [e.target.name]: e.target.value,
     });
   };
+
+  const selectCharterEdit = (versions)=>{
+    setBooks({});
+    setCharter({});
+    setEditVerse({});
+    let data = props.BookAll.filter(x => x.version === versions);
+    setSelectVerse(data);
+  }
 
   const editarVersiculo = async (id)=>{
       //let newVersiculo = {versiculo: editVerse.versiculo}
@@ -74,7 +83,7 @@ export default function EditCharter(props) {
   };
 
   const deleteCharter= async(id)=>{
-      const data = await fetch(`${props.http}/books/editCharter/${id}`,{
+      const data = await fetch(`${props.http}/books/editCharter/${id}/${books._id}`,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -90,17 +99,44 @@ export default function EditCharter(props) {
 
   return (
     <div className="container my-5 py-5 line-color-top">
+
+      <div className="mb-5">
+        <h6>Seleccione una version</h6>
+
+        <div className="d-flex justify-content-start">
+          {props.versiones.map((itm) => (
+            <button
+              key={itm._id}
+              className="btn-select-biblia"
+              onClick={() => selectCharterEdit(itm.versionBible)}
+            >
+              {itm.versionBible}
+            </button>
+          ))}
+        </div>
+      </div>
+
+
+
       <div className="row">
+          {
+              selectVerse !== null && 
         <div className="col-sm-3 ">
           <h5>Libros</h5>
           <ul className="list-group box-per">
-            {props.BookAll.map((itm) => (
+            
+              
+                {selectVerse.map((itm) => (
               <div key={itm._id} onClick={() => selectBook(itm._id)}>
                 <li className="list-group-item">{itm.book}</li>
               </div>
             ))}
+              
+            
+            
           </ul>
         </div>
+        }
 
         <div className="col-sm-3">
           {books.capitulos && (

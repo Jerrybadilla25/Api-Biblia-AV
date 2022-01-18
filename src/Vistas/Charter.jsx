@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Charter(props) {
     return (
-        <div className="container mb-5 mt-3">
-        <div>
+        <div className="container mb-5 mt-3 box-per">
+        <div className=''>
           <h3>Capitulos creados</h3>
           <div className="d-flex-per">
             {props.charter.map((itm) => (
