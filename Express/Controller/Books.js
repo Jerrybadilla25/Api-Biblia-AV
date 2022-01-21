@@ -42,7 +42,7 @@ exports.addCharter = async(req, res)=>{
   const {version, idbook, testament, versiculos, numberVerses, order, libro, userCreator}= req.body;
   const charter = libro+" "+order;
   const validate = await Charter.findOne({charter: charter});
-  if(validate.version === version){
+  if(validate !== null){
     res.json({mesage: `El capitulo ${validate.charter} ya existe`});
   }else{
     //ver funciones callback mas abajo

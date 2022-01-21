@@ -13,16 +13,28 @@ export default function FormCharter(props) {
     formState: { errors },
   } = useForm();
 
+ 
   //toaster
   const notify = (mesage) =>
     toast.success(`${mesage}`, {
-      duration: 5000,
+      duration: 3500,
       position: "top-center",
       style: {
         background: "#080808",
         color: "#ffffff",
       },
     });
+
+
+  const Loading =(message)=>
+   toast.loading(`${message}`, {
+    duration: 9000,
+    position: "top-center",
+    style: {
+      background: "#080808",
+      color: "#ffffff",
+    },
+  });
 
   const selectVersionBiblia = (version)=>{
     getCharter(version);
@@ -45,12 +57,14 @@ export default function FormCharter(props) {
     props.getversiones();
   }, []);
 
+  
+
+  
   const onSubmit = async () => {
     const userName = { userCreator: props.user.user };
     const datos = watch();
     console.log(datos.version);
     const data2 = props.BookAll.filter(x => x.version === datos.version);
-    
     let datosJoin = "";
     if (!datos.libro) {
       const data3 = data2.find((x) => x.book === "Genesis");
@@ -62,6 +76,7 @@ export default function FormCharter(props) {
       const newData = { idbook: data3._id };
       datosJoin = Object.assign(datos, newData, userName);
     }
+    Loading("Guardando los datos......");
     const data = await fetch(`${props.http}/books/charter`, {
       method: "POST",
       body: JSON.stringify(datosJoin),
@@ -72,6 +87,7 @@ export default function FormCharter(props) {
       },
     });
     const res = await data.json();
+    toast.remove();
     notify(res.mesage);
     getCharter(datos.version);
     reset({
@@ -84,6 +100,8 @@ export default function FormCharter(props) {
     });
     props.getversiones();
   };
+
+
 
   return (
     <div className="mx-5 my-5">
