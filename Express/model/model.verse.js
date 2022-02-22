@@ -6,6 +6,7 @@ const Shema = mongoose.Schema;
 
 const newVerse = new Shema({
     title: { type: String},
+    originCharter: { type: String},
     numero : {type: Number},
     versiculo: { type: String},
     version: { type: String},

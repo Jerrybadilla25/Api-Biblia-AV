@@ -5,6 +5,7 @@ const Shema = mongoose.Schema;
 
 
 const newCharte = new Shema({
+    idBook: {type: String},
     charter : {type: String},
     order : {type: Number},
     version: { type: String},

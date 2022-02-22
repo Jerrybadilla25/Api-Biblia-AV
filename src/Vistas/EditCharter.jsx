@@ -183,6 +183,10 @@ export default function EditCharter(props) {
                       cols="10" 
                       rows="10">
                       </textarea>
+                      <p>
+                       <strong>{itm.originCharter}</strong> 
+                      </p>
+                      
                     </div>
                   ))}
                 </div>

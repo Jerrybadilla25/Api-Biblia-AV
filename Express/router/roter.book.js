@@ -6,7 +6,7 @@ const verfyToken = require('../Auth/Token');
 
 //Rutas
 
-router.get('/books/:userName', verfyToken, Controller.getBook);
+router.get('/books/:userName', Controller.getBook);
 router.post("/books",verfyToken, Controller.addBook);
 
 router.post('/charter',verfyToken, Controller.addCharter);
