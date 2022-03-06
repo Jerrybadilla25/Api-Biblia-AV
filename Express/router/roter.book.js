@@ -25,5 +25,9 @@ router.post('/editVerses',verfyToken, Controller.editVerse);
 router.post('/versiones', verfyToken, Controller.addVersiones);
 router.get('/versiones', verfyToken, Controller.getVersiones);
 
+router.get('/verseDia', verfyToken, Controller.getVerseDia);
+
+
+
 
 module.exports = router;

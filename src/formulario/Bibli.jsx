@@ -28,7 +28,7 @@ export default function Bibli(props) {
 
       <div className="box-per">
         {biblias !== null && (
-          <table class="table mt-5">
+          <table className="table mt-5">
             <thead>
               <tr>
                 <th scope="col">indice</th>

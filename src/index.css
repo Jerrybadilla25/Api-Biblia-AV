@@ -121,6 +121,16 @@
     color: var(--l-white);
     padding: 5px;
 }
+.btn-select-verse{
+    width: 150px;
+    border: solid 2px var(--bg-blu);
+    border-radius: 15px;
+    margin-right: 10px;
+    background-color: var(--bg-blu);
+    color: var(--l-white);
+    padding: 5px;
+    
+}
 .btn-select-form:hover{
     border: solid 2px var(--l-message);
     background-color: var(--bg-white);

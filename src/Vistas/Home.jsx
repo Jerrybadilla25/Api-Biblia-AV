@@ -7,6 +7,7 @@ import Biblia from '../formulario/Bibli';
 import Header from './Header';
 import EditCharter from './EditCharter';
 import FormVersion from '../formulario/FormVersion';
+import FormVerseDia from '../formulario/VersiculoDia'
 
 export default function Home(props) {
   const [select, setSelect] = useState("none");
@@ -71,6 +72,10 @@ export default function Home(props) {
     setSelect("Biblia")
   }
 
+  const VerseDia = ()=>{
+    setSelect("verseDia")
+  }
+
   
 
   if(select==="versionBiblia")
@@ -78,8 +83,21 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className='container'>
-        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia}  />
         <FormVersion http={props.http} user={props.user} />
+      </div>
+      
+    </div>
+    
+  )
+
+  if(select==="verseDia")
+  return (
+    <div>
+      <Header/>
+      <div className='container'>
+        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia}  />
+        <FormVerseDia http={props.http} user={props.user}/>
       </div>
       
     </div>
@@ -94,7 +112,7 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className='container'>
-        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia} />
         <FormBook http={props.http} BookAll={BookAll} cargaBook={cargaBook} user={props.user} versiones={versiones} getversiones={getversiones}/>
       </div>
       
@@ -106,7 +124,7 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia} />
         <EditCharter http={props.http} BookAll={BookAll} user={props.user} versiones={versiones}/>
       </div>
     </div>
@@ -117,7 +135,7 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia}/>
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia}/>
         <FormCharter BookAll={BookAll} user={props.user} http={props.http} versiones={versiones} getversiones={getversiones}/>
       </div>
     </div>
@@ -128,7 +146,7 @@ export default function Home(props) {
     <div>
       <Header/>
       <div className="container">
-        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
+        <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia} />
       </div>
     </div>
     
@@ -139,7 +157,7 @@ export default function Home(props) {
       <Header/>
       <div className="container">
         <SelectForm libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} />
-        <Biblia BookAll={BookAll} user={props.user} http={props.http}  versiones={versiones} />
+        <Biblia BookAll={BookAll} user={props.user} http={props.http}  versiones={versiones} VerseDia={VerseDia} />
       </div>
     </div>
     

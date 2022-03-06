@@ -2,6 +2,7 @@ const Book = require('../model/model.book');
 const Charter = require('../model/model.charter');
 const Verse = require('../model/model.verse');
 const Versiones = require('../model/model.version');
+const VerseDia = require('../model/model.verseDia');
 
 
 exports.getBook = async (req, res) => {
@@ -189,7 +190,33 @@ exports.getVersiones = async (req, res)=>{
   res.json(versions);
 }
 
+exports.getVerseDia = async(req, res)=>{
+  try {
+  let versiculoDia = await Verse.find({version: "Biblia_del_oso_1569"}, {_id: 1})
+  let min = 0
+  let max = versiculoDia.length
+  let idx = random(min, max)
+  let versi = await Verse.findById({_id: versiculoDia[idx]._id})
+  let {originCharter, numero, versiculo, version, userCreator, testament, like, view} = versi
+  let data = new VerseDia({originCharter, numero, versiculo, version, userCreator, testament, like, view})
+  let idVerse = await VerseDia.findOne()
+  if(idVerse){
+    await VerseDia.findByIdAndUpdate({_id: idVerse._id},{ $set:{originCharter, numero, versiculo, version, userCreator, testament, like, view}})
+    res.json(data)
+  }else{
+    await data.save()
+    res.json(data)
+  }
+  } catch (error) {
+    console.log(error)
+    res.json({message: "error"})
+  }
+}
 
+//funcion randon
+function random(min, max) {
+  return Math.floor((Math.random() * (max - min + 1)) + min);
+}
 
 
 

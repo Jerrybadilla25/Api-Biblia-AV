@@ -27,6 +27,9 @@ export default function SelectForm(props) {
           <button className="btn-select-form" onClick={props.EditCharte}>
             Edit Charter
           </button>
+          <button className="btn-select-form" onClick={props.VerseDia} >
+            Versiculo dia
+          </button>
           <button className="btn-select-logout" onClick={props.LoginOut}>
             Logout
           </button>
