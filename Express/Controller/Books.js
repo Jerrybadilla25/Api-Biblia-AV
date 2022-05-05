@@ -3,80 +3,87 @@ const Charter = require('../model/model.charter');
 const Verse = require('../model/model.verse');
 const Versiones = require('../model/model.version');
 const VerseDia = require('../model/model.verseDia');
+//const fs = require('fs');
+//const Path = require('path');
+
+
+
+
+const jsonData= require('../biblia/genesis.json');
+let libroNew = "Genesis"
+let nomenclaturaNew = "Gn"
+let versionNew = "Reina_Valera_1960"
+let testamentNew = "Antiguo testamento"
+let creador = "JerryBD"
+let orderNew = 1
+let versionID = "61e5d8cd5cf9d258ea6d569a"
+
+let arrayverses = []
 
 
 exports.getBook = async (req, res) => {
   const user = req.params.userName;
-  const data = await Book.find({ userCreator: user });
-  
-  /*
-  let charte = await Charter.find();
-  for(var i =0; i<charte.length; i++){
-    let char = charte[i].charter;
-    let ver = charte[i].verses;
-    for(var e = 0; e<ver.length; e++){
-      let t = ver[e];
-      console.log(t)
-        await Verse.findByIdAndUpdate({_id: t }, {$set: {originCharter: char }});
-        console.log(`${char} en ${t}`);
-    }
-  }
-  */
-  //console.log(charte)
+  const data1 = await Book.find({ userCreator: user });
 
-  /*
-    let databook = data[0];
-    let idBook = databook._id;
-    let capitulo = databook.capitulos;
-    let idcapitulo = capitulo[22];
-    
-    const datos = await Charter.findById(idcapitulo);
-    if(datos===null){
-      console.log(`no existe este capitulo ${idcapitulo}`);
-    }else{
-      if(datos.idBook){
-      console.log("idBook ya existe");
-     }else{
-      console.log("actualizando");
-      //let charter = await Charter.findById(idcapitulo);
-      await Charter.findByIdAndUpdate({_id: idcapitulo}, {$set: {idBook: idBook}});
-    }
+  //crear nueva version usando json reina valera
+  //reinaValera()
 
-    }
-    */
-    /*
-   for(i = 0; i<data.length; i ++){
-    let databook = data[i];
-    let idBook = databook._id;
-    let capitulo = databook.capitulos;
-    for(a =0; a<capitulo.length; a ++){
-      let idcapitulo = capitulo[a];
-      let datos = await Charter.findById(idcapitulo);
-      if(datos===null){
-        console.log(`no existe este capitulo ${idcapitulo}`);
-      }else{
-        if(datos.idBook){
-          console.log("idBook ya existe");
-        }else{
-          console.log("actualizando");
-          await Charter.findByIdAndUpdate({_id: idcapitulo}, {$set: {idBook: idBook}});
-        }
-      }
-    }
-   }
-*/
 
-/*
-    const data1 = data.filter(x=>x.version === 'Biblia_del_oso_1569' );
-    let versiones = await Versiones.findById("61e39b79081c8c50141668bf");
-    for(let i=0; i<data1.length; i ++){
-      versiones.books.push(data1[i]._id);
-      console.log(data1[i]._id);
-    }
-    await versiones.save();
-    */
-  res.json(data);
+
+  res.json(data1);
 };
+
+
+const reinaValera = async ()=>{
+  const book1 = new Book({
+    book: libroNew, 
+    nomenclatura: nomenclaturaNew,
+    order: orderNew,
+    testament: testamentNew,
+    version: versionNew,
+    userCreator: creador
+  })
+  let versions = await Versiones.findById(versionID);
+  versions.books.push(book1._id);
+  await versions.save();
+  console.log(`${libroNew} creado`)
+  
+  for (let i = 0; i<jsonData.length; i++){
+    let capitulo = new Charter({
+      idBook:book1._id,
+      charter: `${libroNew} ${i+1}`,
+      order: i+1,
+      version: versionNew,
+      testament: testamentNew,
+      userCreator: creador
+    })
+    book1.capitulos.push(capitulo._id)
+    console.log(`${capitulo.charter} creado`)
+
+    //console.log(capitulo)
+    for(let a = 0; a<jsonData[i].length; a ++){
+      let versiculo =jsonData[i][a];
+      let verses1 = new Verse({
+        versiculo: versiculo,
+        numero: a + 1,
+        version: versionNew,
+        testament: testamentNew,
+        userCreator: creador,
+        originCharter: capitulo.charter
+      })
+      await verses1.save()
+      capitulo.verses.push(verses1._id)
+      //arrayverses = capitulo
+      //console.log(verses1)
+      console.log(`verso ${verses1.numero} creado`)
+    }
+    //console.log(arrayverses)
+    await capitulo.save()
+    console.log("capitulo guardado")
+  }
+  await book1.save()
+  console.log("Libro guardado")
+}
 
 
 
@@ -97,37 +104,84 @@ exports.addBook = async (req, res)=>{
   
 }
 
-exports.addCharter = async(req, res)=>{
-  const {version, idbook, testament, versiculos, numberVerses, order, libro, userCreator}= req.body;
-  const charter = libro+" "+order;
-  const validate = await Charter.findOne({charter: charter});
-  if(validate !== null){
-    res.json({mesage: `El capitulo ${validate.charter} ya existe`});
-  }else{
+exports.addCharter = async (req, res) => {
+  const {
+    version,
+    idbook,
+    testament,
+    versiculos,
+    numberVerses,
+    order,
+    libro,
+    userCreator,
+  } = req.body;
+  
+  const charter = libro + " " + order;
+  const validate = await Charter.find({ charter: charter });
+  if (validate !== null) {
+    if (validate.version === version) {
+      res.json({ mesage: `El capitulo ${validate.charter} ya existe` });
+    } else {
+      //ver funciones callback mas abajo
+      const replaceVerseMas = replaceVerse(versiculos, numberVerses);
+      const arrayVerses = divideVerse(replaceVerseMas);
+      const BooksData = await Book.findById(idbook);
+      const newCharter = await Charter({
+        charter:charter,
+        version:version,
+        testament:testament,
+        order:order,
+        userCreator:userCreator,
+        idBook:idbook,
+      });
+      BooksData.capitulos.push(newCharter._id);
+      await BooksData.save();
+      for (let n = 0; n < arrayVerses.length; n++) {
+        const newVerse = await Verse({
+          version: version,
+          testament: testament,
+          userCreator: userCreator,
+          numero: n + 1,
+          originCharter: charter,
+          versiculo: arrayVerses[n],
+        });
+        newCharter.verses.push(newVerse._id);
+        await newVerse.save();
+      }
+      await newCharter.save();
+      res.json({ mesage: "Datos guardados correctamente" });
+    }
+  } else {
     //ver funciones callback mas abajo
     const replaceVerseMas = replaceVerse(versiculos, numberVerses);
     const arrayVerses = divideVerse(replaceVerseMas);
     const BooksData = await Book.findById(idbook);
-    const newCharter = await Charter({charter, version, testament, order, userCreator, idbook});
+    const newCharter = await Charter({
+      charter:charter,
+      version:version,
+      testament:testament,
+      order:order,
+      userCreator:userCreator,
+      idBook:idbook,
+    });
     BooksData.capitulos.push(newCharter._id);
     await BooksData.save();
-    for(let n = 0; n<arrayVerses.length; n++ ){
+    for (let n = 0; n < arrayVerses.length; n++) {
       const newVerse = await Verse({
-        version: version, 
+        version: version,
         testament: testament,
-        userCreator: userCreator, 
-        numero: n+1, 
+        userCreator: userCreator,
+        numero: n + 1,
         originCharter: charter,
-        versiculo: arrayVerses[n]
+        versiculo: arrayVerses[n],
       });
       newCharter.verses.push(newVerse._id);
-      await newVerse.save();  
+      await newVerse.save();
     }
     await newCharter.save();
-    res.json({mesage: "Datos guardados correctamente"});
+    res.json({ mesage: "Datos guardados correctamente" });
   }
-  
-}
+};
 
 exports.getCharter = async(req, res)=>{
     const userName = req.params.userName;
@@ -156,9 +210,9 @@ exports.editCharter = async (req, res)=>{
 
 exports.deleteCharter = async (req, res)=>{
     const idBooks = req.params.idBook;
-    console.log(`idbook ${idBooks}`);
+    //console.log(`idbook ${idBooks}`);
     const idCharter = req.params.id;
-    console.log(`idCharter ${idCharter}`);
+    //console.log(`idCharter ${idCharter}`);
     const data = await Charter.findById(idCharter);
     for(let n=0; n<data.verses.length; n ++){
       await Verse.findByIdAndDelete(data.verses[n]);
@@ -167,13 +221,14 @@ exports.deleteCharter = async (req, res)=>{
     //borarr id capitulo del book.capitulos
     const books = await Book.findById(idBooks);
     const index = books.capitulos.indexOf(idCharter);
-    console.log(index);
+    //console.log(index);
     books.capitulos.splice(index, 1);
-    console.log(books);
+    //console.log(books);
     res.json({mesage: `${data.charter} ha sido borrado`});
 }
 
 exports.editVerse = async (req, res)=>{
+  //console.log(req.body)
    await Verse.findByIdAndUpdate(req.body._id, req.body);
    res.json({mesage: "Cambios realizados"});
 }

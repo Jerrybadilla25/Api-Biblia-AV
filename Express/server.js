@@ -7,7 +7,7 @@ require('dotenv').config();
 
 
 //configuracion
-app.set('port', process.env.PORT || 4003 );
+app.set('port', process.env.PORT || 3002 );
 
 //import databd
 const {mongoose}= require('./database');

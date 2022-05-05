@@ -63,7 +63,7 @@ export default function FormCharter(props) {
   const onSubmit = async () => {
     const userName = { userCreator: props.user.user };
     const datos = watch();
-    console.log(datos.version);
+    //console.log(datos.version);
     const data2 = props.BookAll.filter(x => x.version === datos.version);
     let datosJoin = "";
     if (!datos.libro) {
@@ -72,7 +72,7 @@ export default function FormCharter(props) {
       datosJoin = Object.assign(datos, newData, userName);
     } else {
       const data3 = data2.find((x) => x.book === datos.libro);
-      console.log(data3);
+      //console.log(data3);
       const newData = { idbook: data3._id };
       datosJoin = Object.assign(datos, newData, userName);
     }

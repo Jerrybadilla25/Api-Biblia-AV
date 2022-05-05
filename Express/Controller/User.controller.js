@@ -14,14 +14,14 @@ exports.getUser = async function(req, res){
         userID.password
       );
       if (!match) {
-        console.log("estoy en 2");
+        //console.log("estoy en 2");
         return res.json({ message: "la contraseña no coincide" });
       }
       //generar toquen
       const token = jwt.sign({ id: userID._id }, process.env.SECRET, {
         expiresIn: 86400, // 24 horas
       });
-      console.log("estoy en 3");
+      //console.log("estoy en 3");
       const {user, _id, email} = userID;
       res.status(200).json({ token, user, _id, email});
     }
