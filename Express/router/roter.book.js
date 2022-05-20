@@ -26,6 +26,7 @@ router.post('/versiones', verfyToken, Controller.addVersiones);
 router.get('/versiones', verfyToken, Controller.getVersiones);
 
 router.get('/verseDia', verfyToken, Controller.getVerseDia);
+router.post('/verseDiaManual', verfyToken, Controller.setverseManual);
 
 
 

@@ -7,7 +7,8 @@ import Biblia from '../formulario/Bibli';
 import Header from './Header';
 import EditCharter from './EditCharter';
 import FormVersion from '../formulario/FormVersion';
-import FormVerseDia from '../formulario/VersiculoDia'
+import FormVerseDia from '../formulario/VersiculoDia';
+import VerseDiaManual from '../formulario/VerseDiaManual';
 
 export default function Home(props) {
   const [select, setSelect] = useState("none");
@@ -97,7 +98,9 @@ export default function Home(props) {
       <Header/>
       <div className='container'>
         <SelectForm  libro={libro} capitulo={capitulo} EditCharte={EditCharte} Bibliaapp={Bibliaapp} LoginOut={props.LoginOut} versionBiblia={versionBiblia} VerseDia={VerseDia}  />
+        <VerseDiaManual http={props.http} user={props.user} BookAll={BookAll} />
         <FormVerseDia http={props.http} user={props.user}/>
+       
       </div>
       
     </div>

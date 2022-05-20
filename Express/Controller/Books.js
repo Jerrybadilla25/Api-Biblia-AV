@@ -3,88 +3,13 @@ const Charter = require('../model/model.charter');
 const Verse = require('../model/model.verse');
 const Versiones = require('../model/model.version');
 const VerseDia = require('../model/model.verseDia');
-//const fs = require('fs');
-//const Path = require('path');
-
-
-
-
-const jsonData= require('../biblia/genesis.json');
-let libroNew = "Genesis"
-let nomenclaturaNew = "Gn"
-let versionNew = "Reina_Valera_1960"
-let testamentNew = "Antiguo testamento"
-let creador = "JerryBD"
-let orderNew = 1
-let versionID = "61e5d8cd5cf9d258ea6d569a"
-
-let arrayverses = []
 
 
 exports.getBook = async (req, res) => {
   const user = req.params.userName;
   const data1 = await Book.find({ userCreator: user });
-
-  //crear nueva version usando json reina valera
-  //reinaValera()
-
-
-
   res.json(data1);
 };
-
-
-const reinaValera = async ()=>{
-  const book1 = new Book({
-    book: libroNew, 
-    nomenclatura: nomenclaturaNew,
-    order: orderNew,
-    testament: testamentNew,
-    version: versionNew,
-    userCreator: creador
-  })
-  let versions = await Versiones.findById(versionID);
-  versions.books.push(book1._id);
-  await versions.save();
-  console.log(`${libroNew} creado`)
-  
-  for (let i = 0; i<jsonData.length; i++){
-    let capitulo = new Charter({
-      idBook:book1._id,
-      charter: `${libroNew} ${i+1}`,
-      order: i+1,
-      version: versionNew,
-      testament: testamentNew,
-      userCreator: creador
-    })
-    book1.capitulos.push(capitulo._id)
-    console.log(`${capitulo.charter} creado`)
-
-    //console.log(capitulo)
-    for(let a = 0; a<jsonData[i].length; a ++){
-      let versiculo =jsonData[i][a];
-      let verses1 = new Verse({
-        versiculo: versiculo,
-        numero: a + 1,
-        version: versionNew,
-        testament: testamentNew,
-        userCreator: creador,
-        originCharter: capitulo.charter
-      })
-      await verses1.save()
-      capitulo.verses.push(verses1._id)
-      //arrayverses = capitulo
-      //console.log(verses1)
-      console.log(`verso ${verses1.numero} creado`)
-    }
-    //console.log(arrayverses)
-    await capitulo.save()
-    console.log("capitulo guardado")
-  }
-  await book1.save()
-  console.log("Libro guardado")
-}
-
 
 
 exports.addBook = async (req, res)=>{
@@ -267,6 +192,34 @@ exports.getVerseDia = async(req, res)=>{
     res.json({message: "error"})
   }
 }
+
+
+exports.setverseManual = async (req, res)=>{
+  try {
+    const capitulo = req.body.capitulo
+    const numero1 = parseInt(req.body.numero, 10)
+    let charte = await Charter.findById(capitulo).populate("verses")
+    let verse = charte.verses.find(x => x.numero === numero1)
+    let {originCharter, numero, versiculo, version, userCreator, testament, like, view} = verse
+    let data = new VerseDia({originCharter, numero, versiculo, version, userCreator, testament, like, view})
+    let idVerse = await VerseDia.findOne()
+    if(idVerse){
+      await VerseDia.findByIdAndUpdate({_id: idVerse._id},{ $set:{originCharter, numero, versiculo, version, userCreator, testament, like, view}})
+      res.json(data)
+    }else{
+      await data.save()
+      res.json(data)
+    }
+    res.json(verse)
+    } catch (error) { 
+  }
+}
+
+
+
+
+
+
 
 //funcion randon
 function random(min, max) {

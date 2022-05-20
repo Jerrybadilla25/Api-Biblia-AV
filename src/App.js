@@ -23,8 +23,8 @@ function App(props) {
 
   const [user, setUser]=useState({});
   const [FormUser, setFormUser]=useState({});
-  //const http= "http://api.biblia.genesis2-7.ml";
-  const http = " http://localhost:3000";
+  const http= "http://api.biblia.genesis2-7.ml";
+  //const http = " http://localhost:4001";
   
   
 
