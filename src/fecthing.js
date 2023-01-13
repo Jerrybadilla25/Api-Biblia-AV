@@ -1,5 +1,5 @@
 
-const API = "http://api.biblia.genesis2-7.ml/books/verseDiaManual"
+const API = "http://ajustes.api.bibliaav.ml/books/verseDiaManual"
 //const API = "http://localhost:4001/books/verseDiaManual"
 
 

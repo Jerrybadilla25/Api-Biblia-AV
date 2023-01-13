@@ -94,7 +94,7 @@ export default function FormBook(props) {
             </div>
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Orden de libro</label>
+            <label htmlFor="exampleInputPassword1">Orden de libro</label>
             <input
               type="number"
               className="form-control"
